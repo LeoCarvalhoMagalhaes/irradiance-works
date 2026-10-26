@@ -1,0 +1,323 @@
+{
+ "geradoEm": "2026-10-26",
+ "dependencias": [
+  {
+   "nome": "@react-pdf/renderer",
+   "versao": "4.9.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/@react-pdf/renderer",
+   "repositorio": "https://github.com/diegomura/react-pdf"
+  },
+  {
+   "nome": "class-variance-authority",
+   "versao": "0.7.1",
+   "licenca": "Apache-2.0",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/class-variance-authority",
+   "repositorio": "https://github.com/joe-bell/cva"
+  },
+  {
+   "nome": "cn",
+   "versao": "0.5.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/cn",
+   "repositorio": "https://github.com/shadcn-ui/cn"
+  },
+  {
+   "nome": "exceljs",
+   "versao": "4.4.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/exceljs",
+   "repositorio": "https://github.com/exceljs/exceljs"
+  },
+  {
+   "nome": "leaflet",
+   "versao": "1.9.4",
+   "licenca": "BSD-2-Clause",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/leaflet",
+   "repositorio": "git://github.com/Leaflet/Leaflet"
+  },
+  {
+   "nome": "lucide-react",
+   "versao": "1.61.0",
+   "licenca": "ISC",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/lucide-react",
+   "repositorio": "https://github.com/lucide-icons/lucide"
+  },
+  {
+   "nome": "motion",
+   "versao": "14.6.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/motion",
+   "repositorio": "https://github.com/motiondivision/motion"
+  },
+  {
+   "nome": "next",
+   "versao": "16.4.3",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/next",
+   "repositorio": "vercel/next.js"
+  },
+  {
+   "nome": "next-themes",
+   "versao": "0.4.6",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/next-themes",
+   "repositorio": "https://github.com/pacocoursey/next-themes"
+  },
+  {
+   "nome": "radix-ui",
+   "versao": "1.8.1",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/radix-ui",
+   "repositorio": "https://github.com/radix-ui/primitives"
+  },
+  {
+   "nome": "react",
+   "versao": "19.3.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/react",
+   "repositorio": "https://github.com/react/react"
+  },
+  {
+   "nome": "react-dom",
+   "versao": "19.3.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/react-dom",
+   "repositorio": "https://github.com/react/react"
+  },
+  {
+   "nome": "recharts",
+   "versao": "3.8.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/recharts",
+   "repositorio": "https://github.com/recharts/recharts"
+  },
+  {
+   "nome": "sonner",
+   "versao": "2.0.8",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/sonner",
+   "repositorio": "https://github.com/emilkowalski/sonner"
+  },
+  {
+   "nome": "tw-animate-css",
+   "versao": "1.4.0",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/tw-animate-css",
+   "repositorio": "Wombosvideo/tw-animate-css"
+  },
+  {
+   "nome": "zod",
+   "versao": "4.6.7",
+   "licenca": "MIT",
+   "escopo": "aplicacao",
+   "fonte": "https://www.npmjs.com/package/zod",
+   "repositorio": "https://github.com/colinhacks/zod"
+  },
+  {
+   "nome": "@axe-core/playwright",
+   "versao": "4.14.0",
+   "licenca": "MPL-2.0",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@axe-core/playwright",
+   "repositorio": "https://github.com/dequelabs/axe-core-npm"
+  },
+  {
+   "nome": "@playwright/test",
+   "versao": "1.64.1",
+   "licenca": "Apache-2.0",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@playwright/test",
+   "repositorio": "https://github.com/microsoft/playwright"
+  },
+  {
+   "nome": "@tailwindcss/turbopack",
+   "versao": "4.3.3",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@tailwindcss/turbopack",
+   "repositorio": "https://github.com/tailwindlabs/tailwindcss"
+  },
+  {
+   "nome": "@types/leaflet",
+   "versao": "1.9.22",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@types/leaflet",
+   "repositorio": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+  },
+  {
+   "nome": "@types/node",
+   "versao": "24.19.2",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@types/node",
+   "repositorio": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+  },
+  {
+   "nome": "@types/react",
+   "versao": "19.3.0",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@types/react",
+   "repositorio": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+  },
+  {
+   "nome": "@types/react-dom",
+   "versao": "19.3.0",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/@types/react-dom",
+   "repositorio": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+  },
+  {
+   "nome": "eslint",
+   "versao": "9.39.5",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/eslint",
+   "repositorio": "eslint/eslint"
+  },
+  {
+   "nome": "eslint-config-next",
+   "versao": "16.4.3",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/eslint-config-next",
+   "repositorio": "vercel/next.js"
+  },
+  {
+   "nome": "jsdom",
+   "versao": "30.1.3",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/jsdom",
+   "repositorio": "https://github.com/jsdom/jsdom"
+  },
+  {
+   "nome": "shadcn",
+   "versao": "4.22.1",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/shadcn",
+   "repositorio": "https://github.com/shadcn-ui/ui"
+  },
+  {
+   "nome": "tailwindcss",
+   "versao": "4.3.3",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/tailwindcss",
+   "repositorio": "https://github.com/tailwindlabs/tailwindcss"
+  },
+  {
+   "nome": "tsx",
+   "versao": "4.23.15",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/tsx",
+   "repositorio": "privatenumber/tsx"
+  },
+  {
+   "nome": "typescript",
+   "versao": "5.9.3",
+   "licenca": "Apache-2.0",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/typescript",
+   "repositorio": "https://github.com/microsoft/TypeScript"
+  },
+  {
+   "nome": "vite",
+   "versao": "8.3.5",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/vite",
+   "repositorio": "https://github.com/vitejs/vite"
+  },
+  {
+   "nome": "vitest",
+   "versao": "5.0.5",
+   "licenca": "MIT",
+   "escopo": "desenvolvimento",
+   "fonte": "https://www.npmjs.com/package/vitest",
+   "repositorio": "https://github.com/vitest-dev/vitest"
+  }
+ ],
+ "recursos": [
+  {
+   "nome": "NASA POWER (climatologia)",
+   "licenca": "Dados abertos da NASA; citar NASA Langley Research Center (LaRC) POWER Project",
+   "fonte": "https://power.larc.nasa.gov/",
+   "uso": "src/data/irradiacao.json"
+  },
+  {
+   "nome": "ANEEL — Dados Abertos (Componentes Tarifárias)",
+   "licenca": "ODbL 1.0 (o extrato src/data/tarifas.json também é ODbL)",
+   "fonte": "https://dadosabertos.aneel.gov.br/dataset/componentes-tarifarias",
+   "uso": "src/data/tarifas.json"
+  },
+  {
+   "nome": "MCTI/SIRENE — fatores de emissão do SIN",
+   "licenca": "Dados públicos do Governo Federal (citar a fonte)",
+   "fonte": "https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao",
+   "uso": "src/data/fator-emissao.json"
+  },
+  {
+   "nome": "kelvins/municipios-brasileiros",
+   "licenca": "MIT",
+   "fonte": "https://github.com/kelvins/municipios-brasileiros",
+   "uso": "coordenadas em src/data/irradiacao.json"
+  },
+  {
+   "nome": "Noto Sans e Noto Sans SC (subconjuntos)",
+   "licenca": "SIL Open Font License 1.1",
+   "fonte": "https://github.com/google/fonts",
+   "uso": "public/fontes (PDF)"
+  },
+  {
+   "nome": "Geist e Geist Mono (via next/font)",
+   "licenca": "SIL Open Font License 1.1",
+   "fonte": "https://github.com/vercel/geist-font",
+   "uso": "interface"
+  },
+  {
+   "nome": "OpenStreetMap (blocos do mapa opcional)",
+   "licenca": "ODbL 1.0 — atribuição obrigatória exibida no mapa; uso conforme a política de tiles",
+   "fonte": "https://www.openstreetmap.org/copyright",
+   "uso": "mapa da frota (sob demanda)"
+  },
+  {
+   "nome": "pvlib-python (referência de validação, não distribuída)",
+   "licenca": "BSD-3-Clause",
+   "fonte": "https://github.com/pvlib/pvlib-python",
+   "uso": "scripts/referencia → tests/fixtures"
+  },
+  {
+   "nome": "fontTools (geração das fontes, não distribuída)",
+   "licenca": "MIT",
+   "fonte": "https://github.com/fonttools/fonttools",
+   "uso": "scripts/gerar-fontes-pdf.py"
+  },
+  {
+   "nome": "Textos legais (Planalto, ANEEL)",
+   "licenca": "Atos oficiais (domínio público, Lei 9.610/1998, art. 8º, IV)",
+   "fonte": "https://www.planalto.gov.br/",
+   "uso": "citações em src/data/config-regulatoria.json"
+  }
+ ]
+}

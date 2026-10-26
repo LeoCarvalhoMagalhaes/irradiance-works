@@ -62,8 +62,10 @@ export function analisarUsinas(
     };
   });
   const inicioJanela = somarDias(ctx.hoje, -(DIAS_HISTORICO - 1));
+  // Só a frota de demonstração tem rótulos verdadeiros; usinas comissionadas ficam fora da validação.
+  const demonstracao = new Set(usinas.filter((u) => u.origem === "demonstracao").map((u) => u.id));
   const validacao = validar(
-    resultados.flatMap((r) => r.alertas),
+    resultados.filter((r) => demonstracao.has(r.usinaId)).flatMap((r) => r.alertas),
     rotulos(usinas.filter((u) => u.origem === "demonstracao"), ctx.hoje, inicioJanela, ctx.eventos),
     ctx.hoje,
   );

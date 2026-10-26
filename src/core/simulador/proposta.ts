@@ -112,7 +112,19 @@ export type Proposta = {
   projecao: Projecao;
   financeiro: { cenarios: ResultadoCenario[]; lcoeRKWh: number; investimentoR: number };
   pos2029: Array<{ cenario: CenarioPos2029; vplR: number; paybackAnos: number | null; tir: number | null; economia25AnosR: number }>;
-  sensibilidade: Array<{ parametro: string; baixoVplR: number; altoVplR: number; rotuloBaixo: string; rotuloAlto: string }>;
+  /**
+   * Tornado do VPL à vista. A variação de cada premissa vem como número (formatado pela interface):
+   * "relativa" = variação percentual sobre o valor base; "absoluta" = valor do parâmetro em %;
+   * "cenario" = código do cenário pós-2029.
+   */
+  sensibilidade: Array<{
+    parametro: string;
+    baixoVplR: number;
+    altoVplR: number;
+    tipoVariacao: "relativa" | "absoluta" | "cenario";
+    variacaoBaixo: number | CenarioPos2029;
+    variacaoAlto: number | CenarioPos2029;
+  }>;
   avisos: Aviso[];
 };
 
@@ -413,18 +425,19 @@ export function calcularProposta(entradaBruta: EntradaProposta): Proposta {
   const td = p.financeiras.taxaDescontoAnualPct;
   const dg = p.tecnicas.degradacaoAnualPct;
   const sensibilidade = [
-    { parametro: "tarifa", baixoVplR: vplCom({ tarifaFator: 0.8 }), altoVplR: vplCom({ tarifaFator: 1.2 }), rotuloBaixo: "−20 %", rotuloAlto: "+20 %" },
-    { parametro: "geracao", baixoVplR: vplCom({}, 0.9), altoVplR: vplCom({}, 1.1), rotuloBaixo: "−10 %", rotuloAlto: "+10 %" },
-    { parametro: "investimento", baixoVplR: vplCom({}, 1, 1.2), altoVplR: vplCom({}, 1, 0.8), rotuloBaixo: "+20 %", rotuloAlto: "−20 %" },
-    { parametro: "reajuste", baixoVplR: vplCom({ reajuste: r - 2 }), altoVplR: vplCom({ reajuste: r + 2 }), rotuloBaixo: `${r - 2} %`, rotuloAlto: `${r + 2} %` },
-    { parametro: "taxaDesconto", baixoVplR: vplCom({}, 1, 1, td + 3), altoVplR: vplCom({}, 1, 1, Math.max(0, td - 3)), rotuloBaixo: `${td + 3} %`, rotuloAlto: `${Math.max(0, td - 3)} %` },
-    { parametro: "degradacao", baixoVplR: vplCom({ degradacao: dg + 0.25 }), altoVplR: vplCom({ degradacao: Math.max(0, dg - 0.25) }), rotuloBaixo: `${dg + 0.25} %`, rotuloAlto: `${Math.max(0, dg - 0.25)} %` },
+    { parametro: "tarifa", baixoVplR: vplCom({ tarifaFator: 0.8 }), altoVplR: vplCom({ tarifaFator: 1.2 }), tipoVariacao: "relativa" as const, variacaoBaixo: -20, variacaoAlto: 20 },
+    { parametro: "geracao", baixoVplR: vplCom({}, 0.9), altoVplR: vplCom({}, 1.1), tipoVariacao: "relativa" as const, variacaoBaixo: -10, variacaoAlto: 10 },
+    { parametro: "investimento", baixoVplR: vplCom({}, 1, 1.2), altoVplR: vplCom({}, 1, 0.8), tipoVariacao: "relativa" as const, variacaoBaixo: 20, variacaoAlto: -20 },
+    { parametro: "reajuste", baixoVplR: vplCom({ reajuste: r - 2 }), altoVplR: vplCom({ reajuste: r + 2 }), tipoVariacao: "absoluta" as const, variacaoBaixo: r - 2, variacaoAlto: r + 2 },
+    { parametro: "taxaDesconto", baixoVplR: vplCom({}, 1, 1, td + 3), altoVplR: vplCom({}, 1, 1, Math.max(0, td - 3)), tipoVariacao: "absoluta" as const, variacaoBaixo: td + 3, variacaoAlto: Math.max(0, td - 3) },
+    { parametro: "degradacao", baixoVplR: vplCom({ degradacao: dg + 0.25 }), altoVplR: vplCom({ degradacao: Math.max(0, dg - 0.25) }), tipoVariacao: "absoluta" as const, variacaoBaixo: dg + 0.25, variacaoAlto: Math.max(0, dg - 0.25) },
     {
       parametro: "pos2029",
       baixoVplR: pos2029.find((x) => x.cenario === "somenteTe")!.vplR,
       altoVplR: pos2029.find((x) => x.cenario === "fioB100")!.vplR,
-      rotuloBaixo: "somenteTe",
-      rotuloAlto: "fioB100",
+      tipoVariacao: "cenario" as const,
+      variacaoBaixo: "somenteTe" as CenarioPos2029,
+      variacaoAlto: "fioB100" as CenarioPos2029,
     },
   ].sort((a, b) => Math.abs(b.altoVplR - b.baixoVplR) - Math.abs(a.altoVplR - a.baixoVplR));
 
