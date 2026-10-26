@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# caches de dados brutos e ambiente Python
+/.cache/
+/scripts/referencia/.venv/
+/test-results/
+/playwright-report/

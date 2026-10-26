@@ -1,0 +1,32 @@
+{
+ "aviso": "Equipamentos GENÉRICOS com parâmetros típicos de mercado, não atribuídos a fabricante ou modelo real. Substitua pelos dados do datasheet do equipamento escolhido.",
+ "modulos": [
+  {
+   "id": "mod-generico-450", "nome": "Módulo genérico 450 Wp (monocristalino, 144 meias-células)",
+   "potenciaWp": 450, "vocV": 49.2, "vmpV": 41.2, "iscA": 11.6, "impA": 10.93,
+   "coefVocPctC": -0.28, "coefVmpPctC": -0.36, "coefIscPctC": 0.05, "coefPotenciaPctC": -0.35,
+   "noctC": 45, "comprimentoM": 2.094, "larguraM": 1.038
+  },
+  {
+   "id": "mod-generico-550", "nome": "Módulo genérico 550 Wp (monocristalino, 144 meias-células)",
+   "potenciaWp": 550, "vocV": 49.6, "vmpV": 41.6, "iscA": 14.0, "impA": 13.22,
+   "coefVocPctC": -0.27, "coefVmpPctC": -0.35, "coefIscPctC": 0.048, "coefPotenciaPctC": -0.35,
+   "noctC": 45, "comprimentoM": 2.279, "larguraM": 1.134
+  },
+  {
+   "id": "mod-generico-610", "nome": "Módulo genérico 610 Wp (tipo n, bifacial, 132 meias-células)",
+   "potenciaWp": 610, "vocV": 46.5, "vmpV": 38.9, "iscA": 16.6, "impA": 15.69,
+   "coefVocPctC": -0.25, "coefVmpPctC": -0.30, "coefIscPctC": 0.046, "coefPotenciaPctC": -0.29,
+   "noctC": 44, "comprimentoM": 2.382, "larguraM": 1.134
+  }
+ ],
+ "inversores": [
+  { "id": "inv-generico-3k", "nome": "Inversor genérico 3 kW monofásico", "potenciaCaW": 3000, "tensaoCcMaxV": 600, "mpptMinV": 80, "mpptMaxV": 550, "correnteMaxMpptA": 16, "correnteCurtoMaxMpptA": 20, "numMppt": 1, "etaNominal": 0.97, "fases": 1 },
+  { "id": "inv-generico-5k", "nome": "Inversor genérico 5 kW monofásico", "potenciaCaW": 5000, "tensaoCcMaxV": 600, "mpptMinV": 80, "mpptMaxV": 550, "correnteMaxMpptA": 16, "correnteCurtoMaxMpptA": 20, "numMppt": 2, "etaNominal": 0.97, "fases": 1 },
+  { "id": "inv-generico-8k", "nome": "Inversor genérico 8 kW monofásico", "potenciaCaW": 8000, "tensaoCcMaxV": 600, "mpptMinV": 80, "mpptMaxV": 550, "correnteMaxMpptA": 20, "correnteCurtoMaxMpptA": 25, "numMppt": 2, "etaNominal": 0.972, "fases": 1 },
+  { "id": "inv-generico-10k", "nome": "Inversor genérico 10 kW trifásico", "potenciaCaW": 10000, "tensaoCcMaxV": 1100, "mpptMinV": 160, "mpptMaxV": 1000, "correnteMaxMpptA": 20, "correnteCurtoMaxMpptA": 30, "numMppt": 2, "etaNominal": 0.978, "fases": 3 },
+  { "id": "inv-generico-25k", "nome": "Inversor genérico 25 kW trifásico", "potenciaCaW": 25000, "tensaoCcMaxV": 1100, "mpptMinV": 180, "mpptMaxV": 1000, "correnteMaxMpptA": 32, "correnteCurtoMaxMpptA": 40, "numMppt": 3, "etaNominal": 0.98, "fases": 3 },
+  { "id": "inv-generico-50k", "nome": "Inversor genérico 50 kW trifásico", "potenciaCaW": 50000, "tensaoCcMaxV": 1100, "mpptMinV": 180, "mpptMaxV": 1000, "correnteMaxMpptA": 32, "correnteCurtoMaxMpptA": 40, "numMppt": 5, "etaNominal": 0.982, "fases": 3 },
+  { "id": "inv-generico-100k", "nome": "Inversor genérico 100 kW trifásico", "potenciaCaW": 100000, "tensaoCcMaxV": 1100, "mpptMinV": 200, "mpptMaxV": 1000, "correnteMaxMpptA": 40, "correnteCurtoMaxMpptA": 50, "numMppt": 10, "etaNominal": 0.984, "fases": 3 }
+ ]
+}

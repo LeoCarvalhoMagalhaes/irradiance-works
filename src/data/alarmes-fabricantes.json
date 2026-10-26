@@ -1,0 +1,20 @@
+{
+ "aviso": "Códigos FICTÍCIOS de fabricantes fictícios, usados para demonstrar a padronização de alarmes heterogêneos em categorias comuns.",
+ "categorias": ["isolamento", "rede", "sobretemperatura", "arco", "comunicacao"],
+ "fabricantes": {
+  "A": {
+   "A-101": "isolamento",
+   "A-205": "rede",
+   "A-307": "sobretemperatura",
+   "A-412": "arco",
+   "A-509": "comunicacao"
+  },
+  "B": {
+   "B-0x13": "isolamento",
+   "B-0x21": "rede",
+   "B-0x33": "sobretemperatura",
+   "B-0x41": "arco",
+   "B-0x5F": "comunicacao"
+  }
+ }
+}

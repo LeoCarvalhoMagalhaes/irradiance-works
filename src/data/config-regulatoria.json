@@ -1,0 +1,70 @@
+{
+ "verificadoEm": "2026-10-26",
+ "fontes": {
+  "lei14300": {
+   "titulo": "Lei nº 14.300, de 6 de janeiro de 2022 (texto consolidado, com alterações das Leis nº 14.620/2023 e nº 15.269/2025)",
+   "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14300.htm"
+  },
+  "lei15269": {
+   "titulo": "Lei nº 15.269, de 24 de novembro de 2025 (conversão da MP nº 1.304/2025)",
+   "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15269.htm"
+  },
+  "ren1000": {
+   "titulo": "Resolução Normativa ANEEL nº 1.000/2021, texto compilado (consultado em cópia publicada pela distribuidora Cemig em ago/2025; o portal da ANEEL bloqueou o acesso automatizado)",
+   "url": "https://www2.aneel.gov.br/cedoc/ren20211000.html"
+  }
+ },
+ "custoDisponibilidadeKWh": {
+  "valores": { "monofasico": 30, "bifasico2": 30, "bifasico3": 50, "trifasico": 100 },
+  "fundamento": "REN ANEEL 1.000/2021, art. 291, I a III: 30 kWh (monofásico ou bifásico a dois condutores), 50 kWh (bifásico a três condutores), 100 kWh (trifásico)",
+  "reducaoCadUnicoPct": 50,
+  "fundamentoCadUnico": "Lei 14.300/2022, art. 16 §2º (red. Lei 14.620/2023); REN 1.000, art. 291, parágrafo único (REN 1.098/2024)"
+ },
+ "creditos": {
+  "validadeMeses": 60,
+  "fundamento": "Lei 14.300/2022, art. 13; REN 1.000, art. 655-L; créditos mais antigos usados primeiro (art. 655-G §9º)"
+ },
+ "limitesPotencia": {
+  "microMaxKW": 75,
+  "miniNaoDespachavelMaxKW": 3000,
+  "miniDespachavelMaxKW": 5000,
+  "miniArt26MaxKW": 5000,
+  "art26AteAno": 2045,
+  "fundamento": "Lei 14.300/2022, art. 1º, XI e XIII, e parágrafo único do art. 1º (5 MW até 31/12/2045 para unidades do art. 26); potência instalada em corrente alternada"
+ },
+ "categoriasGd": {
+  "gd1ProtocoloAte": "2023-01-07",
+  "fundamentoGd1": "Lei 14.300, art. 26; REN 1.000, art. 655-O (conectada ou com solicitação protocolada até 07/01/2023)",
+  "gd3PotenciaMinimaKW": 500,
+  "gd3ParticipacaoMinimaPct": 25,
+  "fundamentoGd3": "Lei 14.300, art. 27 §1º; REN 1.000, art. 655-P (minigeração > 500 kW, fonte não despachável, autoconsumo remoto ou geração compartilhada com beneficiário ≥ 25 %)",
+  "janelaTransicao2031": { "inicio": "2023-01-08", "fim": "2023-07-07" },
+  "fundamentoJanela2031": "Lei 14.300, art. 27 §2º; REN 1.000, arts. 655-P §3º e 655-Q §2º (protocolo entre 08/01/2023 e 07/07/2023: regra do art. 17 a partir de 2031)"
+ },
+ "fioB": {
+  "cronogramaPct": { "2023": 15, "2024": 30, "2025": 45, "2026": 60, "2027": 75, "2028": 90 },
+  "fundamento": "Lei 14.300/2022, art. 27, I a VI: percentual das componentes de remuneração dos ativos, quota de reintegração regulatória e O&M da distribuição (TUSD Fio B) sobre toda a energia compensada",
+  "anoRegraArt17": 2029,
+  "fundamentoArt17": "Lei 14.300, arts. 17 e 27, VII; REN 1.000, art. 655-K: a regra definitiva será regulamentada pela ANEEL — premissa de cenário",
+  "gd3AteAno": 2028,
+  "gd3": { "fioBPct": 100, "transmissaoPct": 40, "encargosPeDTfseePct": 100 },
+  "fundamentoGd3Encargos": "Lei 14.300, art. 27 §1º, I a III"
+ },
+ "pos2029": {
+  "cenarios": ["fioB100", "somenteTe", "teMaisBeneficios"],
+  "padrao": "fioB100",
+  "beneficioPadraoPctTusd": 25,
+  "observacao": "Não há regra publicada. Os cenários seguem a abordagem de simulação da EPE (compensação só pela TE, ou TE mais benefícios). O percentual de benefícios é parâmetro de cenário, sem valor oficial."
+ },
+ "faturamentoGrupoB": {
+  "fundamento": "REN 1.000, art. 655-I: parcela de consumo = maior valor entre o custo de disponibilidade e [ (consumo da rede − energia compensada) × tarifa + energia compensada × tarifa SCEE da categoria ]; a energia compensada é limitada ao consumo do ciclo e ao ponto em que a fatura iguala o custo de disponibilidade."
+ },
+ "restricaoGeracao": {
+  "fundamento": "Lei 10.848/2004, art. 1º §§10 e 11, com redação da Lei 15.269/2025",
+  "motivos": {
+   "indisponibilidadeExterna": { "ressarcivel": "sim", "fundamento": "§10, VI: indisponibilidade em instalações de transmissão externas à usina — coberta por encargo" },
+   "confiabilidadeEletrica": { "ressarcivel": "condicional", "fundamento": "§11, I: vedada a cobertura quando os documentos de acesso indicarem a possibilidade de restrição ou o gerador estiver em desconformidade; art. 1º-B prevê compensação retroativa (01/09/2023 até a vigência) mediante termo de compromisso" },
+   "razaoEnergetica": { "ressarcivel": "nao", "fundamento": "§11, II: sobreoferta — impossibilidade de alocar a geração na carga" }
+  }
+ }
+}
