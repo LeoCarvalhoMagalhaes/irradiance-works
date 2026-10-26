@@ -18,7 +18,7 @@ export function Provedores({ idioma, textos, children }: { idioma: Idioma; texto
           <TooltipProvider delayDuration={200}>
             {children}
             <AvisoArmazenamento />
-            <Toaster position="bottom-right" richColors closeButton />
+            <Toaster position="bottom-right" richColors closeButton containerAriaLabel={textos.comum?.notificacoes} />
           </TooltipProvider>
         </ProvedorIdioma>
       </MotionConfig>

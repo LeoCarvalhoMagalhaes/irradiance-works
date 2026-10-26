@@ -2,7 +2,7 @@ import { ArrowRight, Calculator, ClipboardCheck, Radar } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import frota from "@/data/frota.json";
 import irradiacao from "@/data/irradiacao.json";
 import tarifas from "@/data/tarifas.json";
@@ -102,12 +102,12 @@ export default async function PaginaInicio({ params }: { params: Promise<{ lang:
         </h2>
         <dl className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
           {numeros.map((n) => (
-            <Card key={n.rotulo} className="py-5">
-              <CardContent className="px-5">
-                <dd className="text-3xl font-semibold tabular-nums">{n.valor}</dd>
-                <dt className="mt-1 text-sm text-muted-foreground">{n.rotulo}</dt>
-              </CardContent>
-            </Card>
+            // Um único <div> por par (o HTML só admite esse invólucro em <dl>); dt antes de dd no DOM,
+            // número acima do rótulo na tela.
+            <div key={n.rotulo} className="flex flex-col-reverse rounded-xl border bg-card px-5 py-5 text-card-foreground shadow-sm">
+              <dt className="mt-1 text-sm text-muted-foreground">{n.rotulo}</dt>
+              <dd className="text-3xl font-semibold tabular-nums">{n.valor}</dd>
+            </div>
           ))}
         </dl>
         <p className="mt-8 text-sm text-muted-foreground">{t.aviso}</p>

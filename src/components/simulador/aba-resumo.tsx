@@ -6,6 +6,7 @@ import { preencher } from "@/i18n/config";
 import { useFormato, useTextos } from "@/i18n/cliente";
 import { Kpi, MarcaPremissa } from "@/components/shared/indicadores";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { nomeInversor } from "@/lib/nome-equipamento";
 
 export function useTextoAviso() {
   const t = useTextos("simulador");
@@ -23,6 +24,7 @@ export function useTextoAviso() {
 
 export function AbaResumo({ p }: { p: Proposta }) {
   const t = useTextos("simulador");
+  const tComum = useTextos("comum");
   const f = useFormato();
   const r = t.resultado;
   const textoAviso = useTextoAviso();
@@ -42,7 +44,7 @@ export function AbaResumo({ p }: { p: Proposta }) {
           detalhe={
             <>
               <span className="block">{preencher(r.kpis.modulos, { n: p.arranjo.numeroModulos, wp: p.modulo.potenciaWp })}</span>
-              <span className="block">{preencher(r.kpis.inversores, { n: qtdInv, nome: p.inversor.nome || p.inversor.id })}</span>
+              <span className="block">{preencher(r.kpis.inversores, { n: qtdInv, nome: nomeInversor(p.inversor, tComum) })}</span>
             </>
           }
         />

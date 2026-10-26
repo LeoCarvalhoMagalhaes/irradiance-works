@@ -3,6 +3,7 @@
  * a geração prometida é comparada à monitorada ("prometido × real").
  */
 import { z } from "zod";
+import frotaJson from "@/data/frota.json";
 import { diferencaDias } from "../util/tempo";
 import type { AgregadoDia } from "../monitoramento/agregados";
 import type { Alerta } from "../monitoramento/detectores";
@@ -21,6 +22,14 @@ export const esquemaComissionamento = z.object({
 });
 
 export type Comissionamento = z.infer<typeof esquemaComissionamento>;
+
+/**
+ * O sensor virtual corrige o erro da irradiância modelada com outras usinas da mesma cidade (o erro
+ * é comum à cidade). Sem vizinhas na frota, a detecção de sujidade fica menos sensível.
+ */
+export function temVizinhasNaFrota(cidadeId: string): boolean {
+  return frotaJson.usinas.some((u) => u.cidadeId === cidadeId);
+}
 
 /** Custo de limpeza por kWp (PREMISSA editável, sem fonte oficial), com mínimo por visita. */
 export const CUSTO_LIMPEZA_PREMISSA = { rPorKWp: 40, minimoR: 250 };

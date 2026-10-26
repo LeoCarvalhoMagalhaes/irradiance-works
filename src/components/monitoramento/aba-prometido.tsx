@@ -51,7 +51,7 @@ export function AbaPrometido({ usina, resultado }: { usina: UsinaMonitorada; res
         ]}
       >
         <ChartContainer config={config} className="aspect-auto h-full w-full">
-          <BarChart data={dados} barGap={2}>
+          <BarChart accessibilityLayer={false} data={dados} barGap={2}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="rotulo" {...EIXO} />
             <YAxis {...EIXO} width={60} tickFormatter={(v) => f.numero(v)} />

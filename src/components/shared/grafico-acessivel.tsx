@@ -13,7 +13,8 @@ export type ColunaTabela<T> = { chave: string; rotulo: string; valor: (linha: T)
 /**
  * Moldura padrão de gráfico acessível: título, descrição textual, legenda (no próprio gráfico) e
  * alternativa em tabela ("Ver dados"). O SVG do gráfico fica oculto para leitores de tela, que
- * recebem a descrição e a tabela.
+ * recebem a descrição e a tabela; por isso os gráficos usam accessibilityLayer={false} (a camada de
+ * teclado do Recharts criaria um foco dentro de conteúdo aria-hidden).
  */
 export function GraficoAcessivel<T>({
   titulo,

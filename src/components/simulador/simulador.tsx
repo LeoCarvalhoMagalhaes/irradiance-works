@@ -3,7 +3,7 @@
 import { ArrowLeft, ArrowRight, Calculator, FileDown, FileSpreadsheet, Loader2, Pencil, Plus, Save } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { PREMISSAS_PADRAO, TRIBUTOS_EXEMPLO, type Premissas } from "@/core/simulador/premissas";
 import { calcularProposta, type EntradaProposta, entradaPadrao, esquemaEntradaProposta, type Proposta } from "@/core/simulador/proposta";
@@ -53,13 +53,26 @@ export function Simulador() {
   const estado = useEstado();
   const parametros = useSearchParams();
   const [entrada, setEntrada] = useState<EntradaProposta | null>(null);
-  const [etapa, setEtapa] = useState(0);
+  const [etapa, setEtapaEstado] = useState(0);
   const [erros, setErros] = useState<Record<string, string>>({});
   const [proposta, setProposta] = useState<Proposta | null>(null);
   const [calculando, setCalculando] = useState(false);
   const [idSalvo, setIdSalvo] = useState<string | undefined>(undefined);
   const [exportando, setExportando] = useState<"pdf" | "excel" | null>(null);
-  const tituloEtapa = useRef<HTMLHeadingElement>(null);
+
+  // Navegar entre etapas pede foco no título da nova etapa, aplicado quando ele monta (depois da
+  // animação de saída da anterior). No carregamento da página o foco fica no início do documento.
+  const focarTitulo = useRef(false);
+  const setEtapa = useCallback((n: number) => {
+    focarTitulo.current = true;
+    setEtapaEstado(n);
+  }, []);
+  const aoMontarTitulo = useCallback((el: HTMLHeadingElement | null) => {
+    if (el && focarTitulo.current) {
+      focarTitulo.current = false;
+      el.focus();
+    }
+  }, []);
 
   // Entrada inicial (após hidratar o armazenamento): proposta salva (?proposta=) ou padrão.
   if (estado && !entrada) {
@@ -86,12 +99,8 @@ export function Simulador() {
         }
       }, 30);
     },
-    [tComum.erro],
+    [tComum.erro, setEtapa],
   );
-
-  useEffect(() => {
-    tituloEtapa.current?.focus();
-  }, [etapa]);
 
   const etapas = [t.etapas.local, t.etapas.consumo, t.etapas.instalacao, t.etapas.resultado];
   const avancar = () => {
@@ -184,7 +193,7 @@ export function Simulador() {
 
         <AnimatePresence mode="wait" initial={false}>
           <motion.div key={etapa} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}>
-            <h2 ref={tituloEtapa} tabIndex={-1} className="mb-4 text-lg font-semibold outline-none">
+            <h2 ref={aoMontarTitulo} tabIndex={-1} className="mb-4 text-lg font-semibold outline-none">
               {etapas[etapa]}
             </h2>
             {etapa < 3 && (

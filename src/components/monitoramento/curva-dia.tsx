@@ -69,7 +69,7 @@ export function CurvaDia({ dia, titulo, descricao, acoes, inversor, janela }: { 
       ]}
     >
       <ChartContainer config={config} className="aspect-auto h-full w-full">
-        <LineChart data={pontos}>
+        <LineChart accessibilityLayer={false} data={pontos}>
           <CartesianGrid {...GRADE} />
           <XAxis dataKey="minuto" type="number" domain={["dataMin", "dataMax"]} {...EIXO} tickFormatter={(m) => `${Math.floor(m / 60)}h`} ticks={pontos.filter((p) => p.minuto % 120 === 0).map((p) => p.minuto)} />
           <YAxis {...EIXO} width={56} tickFormatter={(v) => f.numero(v, v < 10 ? 1 : 0)} />

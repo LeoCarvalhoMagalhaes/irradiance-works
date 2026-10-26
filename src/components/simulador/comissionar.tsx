@@ -4,6 +4,7 @@ import { CheckCircle2, PlugZap } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
+import { temVizinhasNaFrota } from "@/core/integracao/comissionamento";
 import type { Proposta } from "@/core/simulador/proposta";
 import { somarDias } from "@/core/util/tempo";
 import { preencher } from "@/i18n/config";
@@ -100,6 +101,9 @@ export function DialogoComissionar({ proposta, garantirSalva }: { proposta: Prop
                   <Label htmlFor="falha-string" className="font-normal">{t.falhaString}</Label>
                 </div>
               </fieldset>
+              {sujidade && !temVizinhasNaFrota(proposta.cidade.id) && (
+                <p className="rounded-md bg-atencao-suave/50 p-2 text-xs">{preencher(t.semVizinhas, { cidade: proposta.cidade.nome })}</p>
+              )}
               <p className="text-xs text-muted-foreground">{t.precisaSalvar}</p>
             </div>
             <DialogFooter>

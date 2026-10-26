@@ -9,6 +9,7 @@ import { useFormato, useIdioma, useTextos } from "@/i18n/cliente";
 import { removerComissionamento, useEstado } from "@/lib/estado";
 import { MarcaPremissa } from "@/components/shared/indicadores";
 import { Button } from "@/components/ui/button";
+import { nomeModulo } from "@/lib/nome-equipamento";
 
 export function AbaCadastro({ usina }: { usina: UsinaMonitorada }) {
   const t = useTextos("monitoramento");
@@ -26,7 +27,7 @@ export function AbaCadastro({ usina }: { usina: UsinaMonitorada }) {
     [tc.coordenadas, `${f.numero(usina.cidade.latitude, 3)}°, ${f.numero(usina.cidade.longitude, 3)}°`],
     [tc.comissionamento, f.data(usina.comissionamento)],
     [tc.orientacao, `${f.numero(usina.inclinacaoGraus)}° / ${f.numero(usina.azimuteGraus)}°`],
-    [tc.modulo, `${usina.modulo.nome} (${usina.modulo.potenciaWp} Wp)`],
+    [tc.modulo, `${nomeModulo(usina.modulo, tcomum)} (${usina.modulo.potenciaWp} Wp)`],
     [tc.potenciaCc, f.potenciaKWp(usina.potenciaCcW / 1000)],
     [tc.potenciaCa, f.potenciaKW(usina.potenciaCaW / 1000)],
     [tc.inversores, String(usina.inversores.length)],

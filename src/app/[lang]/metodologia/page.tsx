@@ -64,8 +64,8 @@ export default async function Pagina({ params }: { params: Promise<{ lang: strin
   const fontes = [
     { dado: t.fontes.irradiacao, fonte: `${irradiacao.fonte.nome} ${irradiacao.fonte.versaoApi ?? ""}`, url: "https://power.larc.nasa.gov/", periodo: (irradiacao.fonte.periodo ?? "").match(/\d{4}/g)?.join("–") ?? "", obtido: irradiacao.fonte.obtidoEm },
     { dado: t.fontes.tarifas, fonte: `${tarifas.fonte.nome} (${tarifas.fonte.licenca.split(" —")[0]})`, url: tarifas.fonte.url, periodo: tarifas.distribuidoras.map((x) => `${x.sigla}: ${x.vigencia.inicio}`).join(" · "), obtido: tarifas.fonte.obtidoEm },
-    { dado: t.fontes.emissao, fonte: fatorEmissao.fonte.nome, url: fatorEmissao.fonte.pagina, periodo: `${fatorEmissao.padrao.ano}: ${fatorEmissao.padrao.fatorTCO2MWh} tCO₂/MWh`, obtido: fatorEmissao.fonte.obtidoEm },
-    { dado: t.fontes.coordenadas, fonte: irradiacao.fonte.coordenadas.nome, url: "https://github.com/kelvins/municipios-brasileiros", periodo: irradiacao.fonte.coordenadas.commit.slice(0, 7), obtido: irradiacao.fonte.obtidoEm },
+    { dado: t.fontes.emissao, fonte: "MCTI/SIRENE", url: fatorEmissao.fonte.pagina, periodo: `${fatorEmissao.padrao.ano}: ${fatorEmissao.padrao.fatorTCO2MWh} tCO₂/MWh`, obtido: fatorEmissao.fonte.obtidoEm },
+    { dado: t.fontes.coordenadas, fonte: "kelvins/municipios-brasileiros (MIT)", url: "https://github.com/kelvins/municipios-brasileiros", periodo: irradiacao.fonte.coordenadas.commit.slice(0, 7), obtido: irradiacao.fonte.obtidoEm },
     { dado: t.fontes.legislacao, fonte: "Planalto · ANEEL", url: config.fontes.lei14300.url, periodo: preencher(t.fontes.verificadoEm, { data: data(config.verificadoEm) }), obtido: config.verificadoEm },
   ];
 
@@ -227,9 +227,10 @@ export default async function Pagina({ params }: { params: Promise<{ lang: strin
                     </tr>
                   ))}
                   {licencas.recursos.map((r) => (
-                    <tr key={r.nome} className="border-t">
-                      <th scope="row" className="px-3 py-1.5 text-left font-normal"><a href={r.fonte} className="underline underline-offset-4" rel="noopener noreferrer">{r.nome}</a></th>
-                      <td className="px-3 py-1.5" colSpan={2} lang="pt-BR">{r.licenca}</td>
+                    <tr key={r.id} className="border-t align-top">
+                      <th scope="row" className="px-3 py-1.5 text-left font-normal"><a href={r.fonte} className="underline underline-offset-4" rel="noopener noreferrer">{r.rotulo}</a></th>
+                      <td className="px-3 py-1.5 text-muted-foreground">{t.recursos[r.id as keyof typeof t.recursos]}</td>
+                      <td className="px-3 py-1.5">{r.licencaCurta}</td>
                     </tr>
                   ))}
                 </tbody>

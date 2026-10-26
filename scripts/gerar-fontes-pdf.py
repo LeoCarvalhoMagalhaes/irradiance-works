@@ -5,6 +5,10 @@ Gera as fontes do PDF da proposta (public/fontes/), reduzidas aos caracteres nec
   (≤ ≥ √ Σ Δ ₂ ° ·) — cobre pt, en, es, de, it, fr.
 - Noto Sans SC (OFL 1.1): o conjunto acima + caracteres do dicionário chinês + nível 1 do
   GB2312 (3.755 ideogramas mais frequentes), para nomes digitados pelo usuário.
+- Símbolos (da Noto Sans SC): só os glifos pedidos que a Noto Sans não tem (≤ ≥ → √…), usada como
+  fonte de reserva nos idiomas latinos. A Noto Sans, por sua vez, é a reserva do chinês (₂ ⁻…).
+
+Ao final, confere se todo caractere dos dicionários está coberto pela cadeia de fontes de cada idioma.
 
 As fontes variáveis são instanciadas nos pesos 400 e 700 (fontTools.varLib.instancer).
 Origem: https://github.com/google/fonts (ofl/notosans e ofl/notosanssc), baixadas em .cache/fontes.
@@ -42,10 +46,21 @@ def gb2312_nivel1() -> set[int]:
     return chars
 
 
-def chinesas_dicionario() -> set[int]:
-    caminho = RAIZ / "src" / "i18n" / "dicionarios" / "zh.ts"
+DICIONARIOS = RAIZ / "src" / "i18n" / "dicionarios"
+
+
+def caracteres(arquivo: str) -> set[int]:
+    caminho = DICIONARIOS / arquivo
     texto = caminho.read_text(encoding="utf-8") if caminho.exists() else ""
-    return {ord(c) for c in texto if ord(c) > 0x2E7F}
+    return {ord(c) for c in texto if ord(c) >= 0x20}
+
+
+def chinesas_dicionario() -> set[int]:
+    return {c for c in caracteres("zh.ts") if c > 0x2E7F}
+
+
+def mapa(origem: str) -> set[int]:
+    return set(TTFont(ORIGEM / origem).getBestCmap())
 
 
 def gerar(origem: str, nome: str, codigos: set[int], eixos_extra: dict) -> None:
@@ -66,9 +81,19 @@ def gerar(origem: str, nome: str, codigos: set[int], eixos_extra: dict) -> None:
 
 
 def main():
-    base = latinos()
+    latinas = {c for arq in ("pt.ts", "en.ts", "es.ts", "de.ts", "it.ts", "fr.ts") for c in caracteres(arq)}
+    base = latinos() | latinas
+    noto, sc = mapa("NotoSans.ttf"), mapa("NotoSansSC.ttf")
+    simbolos = (base - noto) & sc
     gerar("NotoSans.ttf", "noto-sans", base, {"wdth": 100})
     gerar("NotoSansSC.ttf", "noto-sans-sc", base | gb2312_nivel1() | chinesas_dicionario(), {})
+    gerar("NotoSansSC.ttf", "noto-simbolos", simbolos, {})
+
+    # Cadeias usadas no PDF: latinos = Noto Sans → símbolos; chinês = Noto Sans SC → Noto Sans.
+    cadeias = {"latinos": (latinas, [noto & base, simbolos]), "zh": (caracteres("zh.ts"), [sc, noto & base])}
+    for nome, (pedidos, fontes) in cadeias.items():
+        faltam = sorted(c for c in pedidos if not any(c in f for f in fontes))
+        print(f"cobertura {nome}:", "completa" if not faltam else " ".join(f"U+{c:04X}" for c in faltam))
     for licenca in ("OFL-NotoSans.txt", "OFL-NotoSansSC.txt"):
         (DESTINO / licenca).write_bytes((ORIGEM / licenca).read_bytes())
 

@@ -157,7 +157,7 @@ export function AbaScada({ usina, resultado, ctx }: { usina: UsinaMonitorada; re
           ]}
         >
           <ChartContainer config={{ potencia: { label: tu.real, color: "var(--chart-2)" }, limite: { label: t.setpoint, color: "var(--chart-5)" } }} className="aspect-auto h-full w-full">
-            <LineChart data={pontos}>
+            <LineChart accessibilityLayer={false} data={pontos}>
               <CartesianGrid {...GRADE} />
               <XAxis dataKey="minuto" type="number" domain={["dataMin", "dataMax"]} {...EIXO} tickFormatter={(m) => `${Math.floor(m / 60)}h`} />
               <YAxis {...EIXO} width={48} tickFormatter={(v) => f.numero(v, 0)} />

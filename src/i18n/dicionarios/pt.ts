@@ -71,6 +71,16 @@ export const pt = {
     naoAplica: "Não se aplica",
     sim: "Sim",
     nao: "Não",
+    notificacoes: "Notificações",
+    equipamentos: {
+      modulos: {
+        "mod-generico-450": "Módulo genérico 450 Wp (monocristalino, 144 meias-células)",
+        "mod-generico-550": "Módulo genérico 550 Wp (monocristalino, 144 meias-células)",
+        "mod-generico-610": "Módulo genérico 610 Wp (tipo n, bifacial, 132 meias-células)",
+      },
+      inversor: "Inversor genérico {kw} kW {fases}",
+      fases: { 1: "monofásico", 3: "trifásico" },
+    },
     armazenamento: {
       corrompido: "Os dados salvos neste navegador estavam corrompidos e foram substituídos pela demonstração. Uma cópia foi preservada.",
       indisponivel: "O armazenamento local está indisponível: nada será salvo nesta sessão.",
@@ -534,6 +544,7 @@ export const pt = {
       sucesso: "Usina {id} comissionada.",
       verUsina: "Abrir monitoramento",
       precisaSalvar: "A proposta será salva antes do comissionamento.",
+      semVizinhas: "Não há usinas da frota em {cidade}: sem sensor virtual, a detecção de sujidade é menos sensível e a falha de demonstração pode não gerar alerta. Para ver a detecção, simule em uma cidade com usinas na frota (por exemplo, Campinas).",
     },
   },
 
@@ -1150,6 +1161,18 @@ export const pt = {
         "Integração com APIs reais de inversores e dataloggers por meio dos adaptadores de entrada.",
         "Retrofit de iluminação LED como medida complementar de eficiência.",
       ],
+    },
+    recursos: {
+      nasa: "Climatologia de irradiação e temperatura (src/data/irradiacao.json). Dados abertos; citar NASA Langley Research Center (LaRC) POWER Project.",
+      aneel: "Componentes tarifárias (src/data/tarifas.json); o extrato versionado também é ODbL.",
+      mcti: "Fator médio de emissão do SIN (src/data/fator-emissao.json). Dados públicos do Governo Federal; citar a fonte.",
+      municipios: "Coordenadas das sedes municipais (origem IBGE).",
+      noto: "Fontes do PDF, reduzidas aos caracteres usados (public/fontes).",
+      geist: "Fontes da interface (via next/font).",
+      osm: "Blocos do mapa opcional, carregados sob demanda; atribuição exibida no mapa e uso conforme a política de tiles.",
+      pvlib: "Referência de validação do modelo solar; não distribuída com o app.",
+      fonttools: "Geração dos subconjuntos de fontes; não distribuída com o app.",
+      legislacao: "Atos oficiais citados nas regras regulatórias (domínio público).",
     },
   },
 

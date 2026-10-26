@@ -95,7 +95,7 @@ export function AbaFinanceiro({ p }: { p: Proposta }) {
         ]}
       >
         <ChartContainer config={config} className="aspect-auto h-full w-full">
-          <LineChart data={acumulado}>
+          <LineChart accessibilityLayer={false} data={acumulado}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="ano" {...EIXO} />
             <YAxis {...EIXO} width={72} tickFormatter={(v) => f.moedaInteira(v)} />
@@ -122,7 +122,7 @@ export function AbaFinanceiro({ p }: { p: Proposta }) {
           ]}
         >
           <ChartContainer config={configParcela} className="aspect-auto h-full w-full">
-            <BarChart data={parcelaEconomia} barGap={2}>
+            <BarChart accessibilityLayer={false} data={parcelaEconomia} barGap={2}>
               <CartesianGrid {...GRADE} />
               <XAxis dataKey="rotulo" {...EIXO} />
               <YAxis {...EIXO} width={64} tickFormatter={(v) => f.moedaInteira(v)} />

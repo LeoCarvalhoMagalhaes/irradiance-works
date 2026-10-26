@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { CampoNumero, CampoSelecao, CampoTexto, GrupoOpcoes } from "./campos";
 import type { PropsEtapa } from "./etapa-local";
+import { nomeInversor, nomeModulo } from "@/lib/nome-equipamento";
 
 /** Rosa dos ventos com a direção do azimute (0° = norte, sentido horário). */
 function Rosa({ azimute, rotulos }: { azimute: number; rotulos: { n: string; l: string; s: string; o: string } }) {
@@ -32,6 +33,7 @@ const INVERSORES = equipamentos.inversores as Inversor[];
 
 export function EtapaInstalacao({ entrada, atualizar, erros }: PropsEtapa) {
   const t = useTextos("simulador");
+  const tComum = useTextos("comum");
   const ti = t.instalacao;
   const modPers = entrada.moduloPersonalizado;
   const invPers = entrada.inversorPersonalizado;
@@ -103,7 +105,7 @@ export function EtapaInstalacao({ entrada, atualizar, erros }: PropsEtapa) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             {!modPers && (
-              <CampoSelecao rotulo={ti.modulo} valor={entrada.moduloId} aoMudar={(moduloId) => atualizar({ moduloId })} opcoes={MODULOS.map((m) => ({ valor: m.id, rotulo: m.nome }))} />
+              <CampoSelecao rotulo={ti.modulo} valor={entrada.moduloId} aoMudar={(moduloId) => atualizar({ moduloId })} opcoes={MODULOS.map((m) => ({ valor: m.id, rotulo: nomeModulo(m, tComum) }))} />
             )}
             <Button
               size="sm"
@@ -119,7 +121,7 @@ export function EtapaInstalacao({ entrada, atualizar, erros }: PropsEtapa) {
                 rotulo={ti.inversor}
                 valor={entrada.inversorId}
                 aoMudar={(inversorId) => atualizar({ inversorId })}
-                opcoes={[{ valor: INVERSOR_AUTOMATICO, rotulo: ti.inversorAuto }, ...INVERSORES.map((i) => ({ valor: i.id, rotulo: i.nome }))]}
+                opcoes={[{ valor: INVERSOR_AUTOMATICO, rotulo: ti.inversorAuto }, ...INVERSORES.map((i) => ({ valor: i.id, rotulo: nomeInversor(i, tComum) }))]}
               />
             )}
             <Button

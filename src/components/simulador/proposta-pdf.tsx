@@ -7,37 +7,42 @@ import type { Proposta } from "@/core/simulador/proposta";
 import { type Idioma, preencher } from "@/i18n/config";
 import type { Dicionario } from "@/i18n/tipos";
 import { criarFormatadores } from "@/lib/formatacao";
+import { nomeInversor, nomeModulo } from "@/lib/nome-equipamento";
 
 type Textos = Pick<Dicionario, "simulador" | "pdf" | "comum">;
 
 const registradas = new Set<string>();
 
+const ARQUIVOS = { NotoSans: "noto-sans", NotoSansSC: "noto-sans-sc", NotoSimbolos: "noto-simbolos" } as const;
+
 /**
- * Fontes embutidas (servidas localmente, OFL 1.1): Noto Sans reduzida para os idiomas latinos (a
- * Helvetica padrão do PDF não tem ≤, ≥ nem CO₂) e Noto Sans SC reduzida para o chinês.
+ * Fontes embutidas (servidas localmente, OFL 1.1), em cadeia de reserva glifo a glifo: Noto Sans para
+ * os idiomas latinos (a Helvetica padrão do PDF não tem ≤, ≥ nem CO₂), com os símbolos que lhe faltam
+ * (≤ ≥ → √) numa subfonte mínima; Noto Sans SC para o chinês, com a Noto Sans para ₂ e ⁻.
+ * scripts/gerar-fontes-pdf.py confere que as cadeias cobrem todos os caracteres dos dicionários.
  */
-function familia(idioma: Idioma): string {
-  const nome = idioma === "zh" ? "NotoSansSC" : "NotoSans";
-  if (!registradas.has(nome)) {
-    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-    const arquivo = idioma === "zh" ? "noto-sans-sc" : "noto-sans";
+function familia(idioma: Idioma): string[] {
+  const cadeia: Array<keyof typeof ARQUIVOS> = idioma === "zh" ? ["NotoSansSC", "NotoSans"] : ["NotoSans", "NotoSimbolos"];
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  for (const nome of cadeia) {
+    if (registradas.has(nome)) continue;
     Font.register({
       family: nome,
       fonts: [
-        { src: `${base}/fontes/${arquivo}-400.ttf`, fontWeight: 400 },
-        { src: `${base}/fontes/${arquivo}-700.ttf`, fontWeight: 700 },
+        { src: `${base}/fontes/${ARQUIVOS[nome]}-400.ttf`, fontWeight: 400 },
+        { src: `${base}/fontes/${ARQUIVOS[nome]}-700.ttf`, fontWeight: 700 },
       ],
     });
-    // Ideogramas podem quebrar em qualquer caractere; nos demais idiomas, sem hifenização automática.
-    Font.registerHyphenationCallback((palavra) => (idioma === "zh" ? Array.from(palavra) : [palavra]));
     registradas.add(nome);
   }
-  return nome;
+  // Ideogramas podem quebrar em qualquer caractere; nos demais idiomas, sem hifenização automática.
+  Font.registerHyphenationCallback((palavra) => (idioma === "zh" ? Array.from(palavra) : [palavra]));
+  return cadeia;
 }
 
 const cores = { tinta: "#1f2a3d", suave: "#5b6577", borda: "#d9dee7", solar: "#e5892a", fundo: "#f5f3ee" };
 
-function criarEstilos(fonte: string) {
+function criarEstilos(fonte: string[]) {
   return StyleSheet.create({
     pagina: { fontFamily: fonte, fontSize: 9, color: cores.tinta, paddingTop: 36, paddingBottom: 54, paddingHorizontal: 40, lineHeight: 1.35 },
     marca: { fontSize: 9, color: cores.suave, marginBottom: 4 },
@@ -103,8 +108,8 @@ function DocumentoProposta({ p, t, idioma }: { p: Proposta; t: Textos; idioma: I
         {linha(tr.kpis.enquadramento, `${tr.portes[p.enquadramento.porte]}${p.enquadramento.categoria ? ` · ${tr.categorias[p.enquadramento.categoria]}` : ""}`)}
 
         <Text style={s.secao}>{t.pdf.equipamentos}</Text>
-        {linha(t.simulador.instalacao.modulo, `${p.modulo.nome || p.modulo.id} · ${p.modulo.potenciaWp} Wp`)}
-        {linha(t.simulador.instalacao.inversor, `${p.inversor.nome || p.inversor.id} · ${f.potenciaKW(p.inversor.potenciaCaW / 1000)}`)}
+        {linha(t.simulador.instalacao.modulo, `${nomeModulo(p.modulo, t.comum)} · ${p.modulo.potenciaWp} Wp`)}
+        {linha(t.simulador.instalacao.inversor, `${nomeInversor(p.inversor, t.comum)} · ${f.potenciaKW(p.inversor.potenciaCaW / 1000)}`)}
         <Text style={{ color: cores.suave, fontSize: 7.5 }}>{t.simulador.instalacao.equipamentoGenerico}</Text>
 
         <Text style={s.secao}>{t.pdf.arranjo}</Text>

@@ -107,7 +107,7 @@ export function AbaVisao({ usina, resultado, ctx, fator }: { usina: UsinaMonitor
         ]}
       >
         <ChartContainer config={configEnergia} className="aspect-auto h-full w-full">
-          <BarChart data={diarios} barGap={1}>
+          <BarChart accessibilityLayer={false} data={diarios} barGap={1}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="rotulo" {...EIXO} minTickGap={24} />
             <YAxis {...EIXO} width={60} tickFormatter={(v) => f.numero(v)} />
@@ -130,7 +130,7 @@ export function AbaVisao({ usina, resultado, ctx, fator }: { usina: UsinaMonitor
         ]}
       >
         <ChartContainer config={configPr} className="aspect-auto h-full w-full">
-          <LineChart data={tendencia}>
+          <LineChart accessibilityLayer={false} data={tendencia}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="chave" {...EIXO} tickFormatter={(c) => f.mesAno(String(c).slice(0, 7))} minTickGap={40} />
             <YAxis {...EIXO} width={48} domain={["auto", "auto"]} tickFormatter={(v) => f.numero(v, 2)} />

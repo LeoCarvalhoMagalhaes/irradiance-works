@@ -41,7 +41,7 @@ export function AbaFatura({ p }: { p: Proposta }) {
         ]}
       >
         <ChartContainer config={config} className="aspect-auto h-full w-full">
-          <BarChart data={dados} barGap={2}>
+          <BarChart accessibilityLayer={false} data={dados} barGap={2}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="rotulo" {...EIXO} />
             <YAxis {...EIXO} width={64} tickFormatter={(v) => f.moedaInteira(v)} />

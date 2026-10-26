@@ -47,7 +47,7 @@ export function AbaGeracao({ p }: { p: Proposta }) {
         ]}
       >
         <ChartContainer config={config} className="aspect-auto h-full w-full">
-          <BarChart data={dados} barGap={2} barCategoryGap="20%">
+          <BarChart accessibilityLayer={false} data={dados} barGap={2} barCategoryGap="20%">
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="mes" {...EIXO} />
             <YAxis {...EIXO} width={56} tickFormatter={(v) => f.numero(v)} />
@@ -85,7 +85,7 @@ export function AbaGeracao({ p }: { p: Proposta }) {
         ]}
       >
         <ChartContainer config={configPerfil} className="aspect-auto h-full w-full">
-          <AreaChart data={perfil}>
+          <AreaChart accessibilityLayer={false} data={perfil}>
             <CartesianGrid {...GRADE} />
             <XAxis dataKey="hora" {...EIXO} tickFormatter={(h) => `${h}h`} interval={2} />
             <YAxis {...EIXO} width={48} tickFormatter={(v) => f.numero(v, 1)} label={{ value: t.potenciaMedia, angle: -90, position: "insideLeft", offset: 0, className: "fill-muted-foreground text-[11px]" }} />

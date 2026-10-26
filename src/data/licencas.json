@@ -260,60 +260,90 @@
  ],
  "recursos": [
   {
+   "id": "nasa",
+   "rotulo": "NASA POWER",
+   "licencaCurta": "NASA Open Data",
    "nome": "NASA POWER (climatologia)",
    "licenca": "Dados abertos da NASA; citar NASA Langley Research Center (LaRC) POWER Project",
    "fonte": "https://power.larc.nasa.gov/",
    "uso": "src/data/irradiacao.json"
   },
   {
+   "id": "aneel",
+   "rotulo": "ANEEL — Dados Abertos",
+   "licencaCurta": "ODbL 1.0",
    "nome": "ANEEL — Dados Abertos (Componentes Tarifárias)",
    "licenca": "ODbL 1.0 (o extrato src/data/tarifas.json também é ODbL)",
    "fonte": "https://dadosabertos.aneel.gov.br/dataset/componentes-tarifarias",
    "uso": "src/data/tarifas.json"
   },
   {
+   "id": "mcti",
+   "rotulo": "MCTI/SIRENE",
+   "licencaCurta": "gov.br",
    "nome": "MCTI/SIRENE — fatores de emissão do SIN",
    "licenca": "Dados públicos do Governo Federal (citar a fonte)",
    "fonte": "https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao",
    "uso": "src/data/fator-emissao.json"
   },
   {
+   "id": "municipios",
+   "rotulo": "kelvins/municipios-brasileiros",
+   "licencaCurta": "MIT",
    "nome": "kelvins/municipios-brasileiros",
    "licenca": "MIT",
    "fonte": "https://github.com/kelvins/municipios-brasileiros",
    "uso": "coordenadas em src/data/irradiacao.json"
   },
   {
+   "id": "noto",
+   "rotulo": "Noto Sans, Noto Sans SC",
+   "licencaCurta": "OFL 1.1",
    "nome": "Noto Sans e Noto Sans SC (subconjuntos)",
    "licenca": "SIL Open Font License 1.1",
    "fonte": "https://github.com/google/fonts",
    "uso": "public/fontes (PDF)"
   },
   {
+   "id": "geist",
+   "rotulo": "Geist, Geist Mono",
+   "licencaCurta": "OFL 1.1",
    "nome": "Geist e Geist Mono (via next/font)",
    "licenca": "SIL Open Font License 1.1",
    "fonte": "https://github.com/vercel/geist-font",
    "uso": "interface"
   },
   {
+   "id": "osm",
+   "rotulo": "OpenStreetMap",
+   "licencaCurta": "ODbL 1.0",
    "nome": "OpenStreetMap (blocos do mapa opcional)",
    "licenca": "ODbL 1.0 — atribuição obrigatória exibida no mapa; uso conforme a política de tiles",
    "fonte": "https://www.openstreetmap.org/copyright",
    "uso": "mapa da frota (sob demanda)"
   },
   {
+   "id": "pvlib",
+   "rotulo": "pvlib-python",
+   "licencaCurta": "BSD-3-Clause",
    "nome": "pvlib-python (referência de validação, não distribuída)",
    "licenca": "BSD-3-Clause",
    "fonte": "https://github.com/pvlib/pvlib-python",
    "uso": "scripts/referencia → tests/fixtures"
   },
   {
+   "id": "fonttools",
+   "rotulo": "fontTools",
+   "licencaCurta": "MIT",
    "nome": "fontTools (geração das fontes, não distribuída)",
    "licenca": "MIT",
    "fonte": "https://github.com/fonttools/fonttools",
    "uso": "scripts/gerar-fontes-pdf.py"
   },
   {
+   "id": "legislacao",
+   "rotulo": "Planalto, ANEEL",
+   "licencaCurta": "Lei 9.610/1998, art. 8º, IV",
    "nome": "Textos legais (Planalto, ANEEL)",
    "licenca": "Atos oficiais (domínio público, Lei 9.610/1998, art. 8º, IV)",
    "fonte": "https://www.planalto.gov.br/",
