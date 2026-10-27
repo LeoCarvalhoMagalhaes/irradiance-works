@@ -63,33 +63,46 @@ test("proposta → PDF e Excel → comissionamento → usina na frota → alerta
   const os = (await aviso.textContent())!.match(/OS-[A-Z0-9]+-\d{4}/)![0];
 
   // 6. A OS está na manutenção, ligada à usina comissionada.
-  await page.goto("/pt/manutencao/");
+  await page.goto("pt/manutencao/");
   const linha = page.getByRole("row").filter({ hasText: os });
   await expect(linha).toContainText(id);
   await expect(linha).toContainText(t.manutencao.status.aberta);
 
   // 7. A usina também aparece na tabela da frota.
-  await page.goto("/pt/monitoramento/");
+  await page.goto("pt/monitoramento/");
   await expect(page.getByRole("row").filter({ hasText: "Teste E2E" })).toBeVisible({ timeout: 90_000 });
 
   expect(erros).toEqual([]);
 });
 
 test("retorno simulado do CMMS conclui as OS abertas", async ({ page }) => {
-  await page.goto("/pt/monitoramento/usina/?id=UFV-16");
+  await page.goto("pt/monitoramento/usina/?id=UFV-16");
   await page.getByRole("tab", { name: t.monitoramento.usina.abas.alertas }).click();
   await page.getByRole("tabpanel").getByRole("button", { name: t.monitoramento.usina.alertas.criarOs }).first().click({ timeout: 90_000 });
-  await page.goto("/pt/manutencao/");
+  await page.goto("pt/manutencao/");
   await page.getByRole("button", { name: t.manutencao.integracao.simular }).click();
   await expect(page.getByText(preencher(t.manutencao.integracao.simulado, { n: 1 }))).toBeVisible();
   await expect(page.getByRole("row").filter({ hasText: t.manutencao.status.concluida }).first()).toBeVisible();
 });
 
 test("restaurar a demonstração pelo rodapé (módulo de estado carregado sob demanda)", async ({ page }) => {
-  await page.goto("/pt/");
+  await page.goto("pt/");
   await page.getByRole("button", { name: t.comum.armazenamento.restaurar }).click();
   await page.getByRole("dialog").getByRole("button", { name: t.comum.acoes.confirmar }).click();
   await expect(page.getByText(t.comum.armazenamento.restaurado)).toBeVisible();
   const salvo = await page.evaluate(() => JSON.parse(localStorage.getItem("irradiance-works:v1") ?? "null"));
   expect(salvo?.comissionamentos?.[0]?.id).toBe("UFV-C01");
+});
+
+test("clicar numa usina no mapa abre o detalhe (respeitando o caminho base)", async ({ page }) => {
+  // Os blocos do OpenStreetMap são externos: bloqueados no teste, os marcadores são vetoriais.
+  await page.route("https://tile.openstreetmap.org/**", (r) => r.abort());
+  await page.goto("pt/monitoramento/");
+  await expect(page.getByRole("row").filter({ hasText: "UFV-16" })).toBeVisible({ timeout: 90_000 });
+  await page.getByRole("button", { name: t.monitoramento.mapa.mostrar }).click();
+  const marcadores = page.locator("path.leaflet-interactive");
+  await expect(marcadores.first()).toBeVisible();
+  await marcadores.first().click({ force: true });
+  await expect(page).toHaveURL(/\/pt\/monitoramento\/usina\/\?id=UFV-/);
+  await expect(page.getByRole("tab", { name: t.monitoramento.usina.abas.visao })).toBeVisible({ timeout: 90_000 });
 });

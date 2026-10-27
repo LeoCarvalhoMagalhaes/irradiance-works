@@ -28,9 +28,14 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      # Os testes de ponta a ponta rodam sob o mesmo caminho base do site publicado.
       - run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /irradiance-works
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+        env:
+          E2E_BASE_PATH: /irradiance-works
       - if: failure()
         uses: actions/upload-artifact@v7
         with:

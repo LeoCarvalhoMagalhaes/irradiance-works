@@ -3,6 +3,7 @@
 import { ArrowDown, ArrowUp, ArrowUpDown, Map as IconeMapa } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import type { ResultadoUsina } from "@/core/monitoramento/analise";
 import type { UsinaMonitorada } from "@/core/monitoramento/frota";
@@ -43,6 +44,7 @@ export function Frota() {
   const tc = useTextos("comum");
   const f = useFormato();
   const idioma = useIdioma();
+  const roteador = useRouter();
   const tituloAlerta = useTituloAlerta();
   const { analise } = useAnaliseAtual();
   const [busca, setBusca] = useState("");
@@ -227,6 +229,7 @@ export function Frota() {
             {mostrarMapa ? (
               <MapaFrota
                 atribuicao={t.mapa.atribuicao}
+                aoAbrir={(href) => roteador.push(href)}
                 pontos={filtradas.map((l) => ({ id: l.usina.id, nome: l.usina.nome, latitude: l.usina.cidade.latitude, longitude: l.usina.cidade.longitude, status: l.status, rotuloStatus: tc.status[l.status], href: hrefUsina(l.usina.id) }))}
               />
             ) : (

@@ -1,6 +1,6 @@
 # Irradiance Works
 
-> **English summary.** Irradiance Works is a portfolio web app for Brazilian distributed solar. A grid-tied PV **simulator** for low-voltage (Group B) consumers produces an 8,760-hour simulation, ANEEL tariff breakdown, Law 14,300 "Fio B" billing, financial scenarios, a PDF proposal and an Excel workbook with live formulas. A **fleet monitoring** module runs fault detectors on synthetic 5-minute telemetry, ranks losses in BRL and hands qualified work orders to a CMMS. A proposal can be **commissioned** into a monitored plant and tracked as *promised vs actual*. Both modules share one pure, tested TypeScript core. Every number traces to a documented formula, an editable assumption or a cited official source (NASA POWER, ANEEL open data, MCTI). The site is fully static (GitHub Pages), runs entirely in the browser and is available in 7 languages (pt, en, es, de, it, fr, zh). 703 unit tests, 50 end-to-end tests, Lighthouse 98–100 on desktop.
+> **English summary.** Irradiance Works is a portfolio web app for Brazilian distributed solar. A grid-tied PV **simulator** for low-voltage (Group B) consumers produces an 8,760-hour simulation, ANEEL tariff breakdown, Law 14,300 "Fio B" billing, financial scenarios, a PDF proposal and an Excel workbook with live formulas. A **fleet monitoring** module runs fault detectors on synthetic 5-minute telemetry, ranks losses in BRL and hands qualified work orders to a CMMS. A proposal can be **commissioned** into a monitored plant and tracked as *promised vs actual*. Both modules share one pure, tested TypeScript core. Every number traces to a documented formula, an editable assumption or a cited official source (NASA POWER, ANEEL open data, MCTI). The site is fully static (GitHub Pages), runs entirely in the browser and is available in 7 languages (pt, en, es, de, it, fr, zh). 703 unit tests, 51 end-to-end tests, Lighthouse 98–100 on desktop.
 >
 > **Live demo:** https://leocarvalhomagalhaes.github.io/irradiance-works/
 
@@ -73,7 +73,7 @@ Números reais, medidos em 26/10/2026.
 | Conjunto | Resultado |
 |---|---|
 | Unitários (Vitest), incluindo núcleo solar contra pvlib-python, faturamento e fluxo de caixa contra planilha independente, paridade dos 7 dicionários | **703 aprovados** |
-| Ponta a ponta (Playwright): fluxo proposta → PDF/Excel → comissionamento → alerta → OS → manutenção; 7 idiomas em desktop e celular, com PDF e sem rolagem horizontal; axe (WCAG 2.2 AA) em tema claro e escuro; teclado; movimento reduzido | **50 aprovados** |
+| Ponta a ponta (Playwright): fluxo proposta → PDF/Excel → comissionamento → alerta → OS → manutenção; 7 idiomas em desktop e celular, com PDF e sem rolagem horizontal; axe (WCAG 2.2 AA) em tema claro e escuro; teclado; movimento reduzido | **51 aprovados** |
 
 **Detectores de falha** (frota de demonstração, 17 falhas rotuladas; recalculado ao vivo na página de metodologia)
 
@@ -119,7 +119,7 @@ npm run dev            # http://localhost:3000/pt/
 npm test               # testes unitários
 npm run build          # exportação estática em out/
 node scripts/servir-estatico.mjs 4173   # serve out/ como o GitHub Pages
-npm run test:e2e       # Playwright (usa o servidor acima)
+npm run test:e2e       # Playwright (usa o servidor acima; E2E_BASE_PATH=/irradiance-works testa sob o caminho base)
 npx playwright install chromium         # na primeira vez
 ```
 

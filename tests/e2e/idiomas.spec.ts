@@ -16,7 +16,7 @@ for (const idioma of IDIOMAS) {
         ["monitoramento/", t.monitoramento.titulo],
       ];
       for (const [caminho, titulo] of paginas) {
-        await page.goto(`/${idioma}/${caminho}`);
+        await page.goto(`${idioma}/${caminho}`);
         await expect(page.locator("html")).toHaveAttribute("lang", LANG_HTML[idioma]);
         await expect(page.getByRole("heading", { level: 1 })).toHaveText(titulo);
         // Textos longos (alemão, francês) não podem estourar a largura da página.
@@ -41,7 +41,7 @@ for (const idioma of IDIOMAS) {
 }
 
 test("seletor de idioma preserva a página e os parâmetros", async ({ page }) => {
-  await page.goto("/pt/monitoramento/usina/?id=UFV-03");
+  await page.goto("pt/monitoramento/usina/?id=UFV-03");
   await page.getByRole("button", { name: new RegExp(DICIONARIOS.pt.comum.idioma) }).click();
   await page.getByRole("menuitem", { name: NOME_IDIOMA.de }).click();
   await expect(page).toHaveURL(/\/de\/monitoramento\/usina\/\?id=UFV-03$/);
@@ -50,6 +50,6 @@ test("seletor de idioma preserva a página e os parâmetros", async ({ page }) =
 });
 
 test("raiz redireciona para um idioma", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("./");
   await expect(page).toHaveURL(/\/(pt|en|es|de|it|fr|zh)\/$/);
 });

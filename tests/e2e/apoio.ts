@@ -22,7 +22,7 @@ export function vigiarErros(pagina: Page): string[] {
 /** Percorre o assistente com os valores padrão (ou outra cidade, pelo código IBGE) até o resultado. */
 export async function simularPadrao(pagina: Page, idioma: Idioma, cidadeId?: string) {
   const t = DICIONARIOS[idioma];
-  await pagina.goto(`/${idioma}/simulador/`);
+  await pagina.goto(`${idioma}/simulador/`);
   if (cidadeId) await pagina.getByLabel(t.simulador.local.cidade, { exact: true }).selectOption(cidadeId);
   for (let i = 0; i < 2; i++) await pagina.getByRole("button", { name: t.comum.acoes.proximo }).click();
   await pagina.getByRole("button", { name: t.simulador.calcular }).click();

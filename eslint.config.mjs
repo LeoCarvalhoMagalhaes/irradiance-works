@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Caches locais e saídas de teste (não versionados).
+    ".cache/**",
+    "test-results/**",
+    "playwright-report/**",
+    "scripts/referencia/.venv/**",
   ]),
 ]);
 

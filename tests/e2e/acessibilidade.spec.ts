@@ -15,10 +15,10 @@ for (const tema of ["light", "dark"] as const) {
     test.use({ colorScheme: tema });
 
     for (const [nome, caminho] of [
-      ["início", "/pt/"],
-      ["metodologia", "/pt/metodologia/"],
-      ["manutenção", "/pt/manutencao/"],
-      ["início em chinês", "/zh/"],
+      ["início", "pt/"],
+      ["metodologia", "pt/metodologia/"],
+      ["manutenção", "pt/manutencao/"],
+      ["início em chinês", "zh/"],
     ] as const) {
       test(nome, async ({ page }) => {
         await page.goto(caminho);
@@ -27,7 +27,7 @@ for (const tema of ["light", "dark"] as const) {
     }
 
     test("assistente e resultado do simulador", async ({ page }) => {
-      await page.goto("/pt/simulador/");
+      await page.goto("pt/simulador/");
       expect(await auditar(page)).toEqual([]);
       await simularPadrao(page, "pt");
       for (const aba of ["resumo", "fatura", "eletrica"] as const) {
@@ -37,10 +37,10 @@ for (const tema of ["light", "dark"] as const) {
     });
 
     test("frota e detalhe da usina", async ({ page }) => {
-      await page.goto("/pt/monitoramento/");
+      await page.goto("pt/monitoramento/");
       await expect(page.getByRole("row").filter({ hasText: "UFV-16" })).toBeVisible({ timeout: 90_000 });
       expect(await auditar(page)).toEqual([]);
-      await page.goto("/pt/monitoramento/usina/?id=UFV-16");
+      await page.goto("pt/monitoramento/usina/?id=UFV-16");
       await expect(page.getByRole("tab", { name: t.monitoramento.usina.abas.alertas })).toBeVisible({ timeout: 90_000 });
       expect(await auditar(page)).toEqual([]);
     });
@@ -48,7 +48,7 @@ for (const tema of ["light", "dark"] as const) {
 }
 
 test("teclado: atalho para o conteúdo e assistente operável sem mouse", async ({ page }) => {
-  await page.goto("/pt/simulador/");
+  await page.goto("pt/simulador/");
   await page.keyboard.press("Tab");
   const atalho = page.getByRole("link", { name: t.comum.pularParaConteudo });
   await expect(atalho).toBeFocused();
@@ -75,7 +75,7 @@ test.describe("movimento reduzido", () => {
   test.use({ reducedMotion: "reduce" });
 
   test("assistente funciona e não anima transições", async ({ page }) => {
-    await page.goto("/pt/");
+    await page.goto("pt/");
     const animacoes = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === "running").length);
     expect(animacoes).toBe(0);
     await simularPadrao(page, "pt");
