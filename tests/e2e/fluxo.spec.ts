@@ -84,3 +84,12 @@ test("retorno simulado do CMMS conclui as OS abertas", async ({ page }) => {
   await expect(page.getByText(preencher(t.manutencao.integracao.simulado, { n: 1 }))).toBeVisible();
   await expect(page.getByRole("row").filter({ hasText: t.manutencao.status.concluida }).first()).toBeVisible();
 });
+
+test("restaurar a demonstração pelo rodapé (módulo de estado carregado sob demanda)", async ({ page }) => {
+  await page.goto("/pt/");
+  await page.getByRole("button", { name: t.comum.armazenamento.restaurar }).click();
+  await page.getByRole("dialog").getByRole("button", { name: t.comum.acoes.confirmar }).click();
+  await expect(page.getByText(t.comum.armazenamento.restaurado)).toBeVisible();
+  const salvo = await page.evaluate(() => JSON.parse(localStorage.getItem("irradiance-works:v1") ?? "null"));
+  expect(salvo?.comissionamentos?.[0]?.id).toBe("UFV-C01");
+});

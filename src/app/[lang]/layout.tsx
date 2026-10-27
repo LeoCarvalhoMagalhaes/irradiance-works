@@ -10,6 +10,9 @@ import { geistMono, geistSans } from "../fontes";
 
 export const dynamicParams = false;
 
+/** Endereço público com o caminho base (hreflang exige URLs absolutas). Definido no deploy. */
+const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4173").replace(/\/$/, "");
+
 export function generateStaticParams() {
   return IDIOMAS.map((lang) => ({ lang }));
 }
@@ -23,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: { default: `${d.comum.marca} · ${d.comum.slogan}`, template: `%s · ${d.comum.marca}` },
     description: d.inicio.subtitulo,
-    alternates: { languages: Object.fromEntries(IDIOMAS.map((i) => [LANG_HTML[i], `/${i}/`])) },
+    alternates: { languages: Object.fromEntries(IDIOMAS.map((i) => [LANG_HTML[i], `${SITE}/${i}/`])) },
   };
 }
 

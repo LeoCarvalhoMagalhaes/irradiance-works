@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { type Idioma, IDIOMAS, LANG_HTML, NOME_IDIOMA } from "@/i18n/config";
 import { useIdioma, useTextos } from "@/i18n/cliente";
-import { gravarIdiomaPreferido } from "@/lib/persistencia";
+import { gravarIdiomaPreferido } from "@/lib/idioma-preferido";
 
 /** Troca de idioma preservando a página e os parâmetros (por exemplo, ?id= da usina). */
 export function SeletorIdioma() {

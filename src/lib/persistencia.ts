@@ -105,21 +105,3 @@ export function gravarEstado(estado: Estado): boolean {
     return false;
   }
 }
-
-export const CHAVE_IDIOMA = "irradiance-works:idioma";
-
-export function lerIdiomaPreferido(): string | null {
-  try {
-    return window.localStorage.getItem(CHAVE_IDIOMA);
-  } catch {
-    return null;
-  }
-}
-
-export function gravarIdiomaPreferido(idioma: string): void {
-  try {
-    window.localStorage.setItem(CHAVE_IDIOMA, idioma);
-  } catch {
-    // Preferência opcional.
-  }
-}

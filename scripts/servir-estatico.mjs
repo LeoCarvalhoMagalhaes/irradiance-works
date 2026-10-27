@@ -1,12 +1,13 @@
 /**
  * Servidor estático mínimo para a exportação (pasta out/), usado nos testes de ponta a ponta e
  * na medição do Lighthouse. Reproduz o GitHub Pages: caminho base opcional, index.html em pastas
- * e 404.html para rotas inexistentes.
+ * 404.html para rotas inexistentes e compressão gzip de textos (como o GitHub Pages).
  * Uso: node scripts/servir-estatico.mjs [porta] [caminhoBase]
  */
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
 import { extname, join, normalize } from "node:path";
+import { createGzip } from "node:zlib";
 
 const porta = Number(process.argv[2] ?? 4173);
 const base = process.argv[3] ?? "";
@@ -31,6 +32,9 @@ createServer((req, res) => {
     arquivo = join(raiz, "404.html");
     status = 404;
   }
-  res.writeHead(status, { "Content-Type": tipos[extname(arquivo)] ?? "application/octet-stream" });
-  createReadStream(arquivo).pipe(res);
+  const tipo = tipos[extname(arquivo)] ?? "application/octet-stream";
+  const comprimir = /gzip/.test(req.headers["accept-encoding"] ?? "") && /text|javascript|json|svg|manifest/.test(tipo);
+  res.writeHead(status, { "Content-Type": tipo, ...(comprimir ? { "Content-Encoding": "gzip", Vary: "Accept-Encoding" } : {}) });
+  const fluxo = createReadStream(arquivo);
+  (comprimir ? fluxo.pipe(createGzip()) : fluxo).pipe(res);
 }).listen(porta, () => console.log(`Servindo out/ em http://localhost:${porta}${base}/`));

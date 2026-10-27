@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useTextos } from "@/i18n/cliente";
-import { restaurarDemonstracao } from "@/lib/estado";
 
 export function BotaoRestaurarDemonstracao() {
   const t = useTextos("comum");
@@ -29,7 +28,9 @@ export function BotaoRestaurarDemonstracao() {
           </DialogClose>
           <Button
             variant="destructive"
-            onClick={() => {
+            onClick={async () => {
+              // Carregado sob demanda: o estado arrasta o núcleo de cálculo, desnecessário no rodapé.
+              const { restaurarDemonstracao } = await import("@/lib/estado");
               restaurarDemonstracao();
               setAberto(false);
               toast.success(t.armazenamento.restaurado);

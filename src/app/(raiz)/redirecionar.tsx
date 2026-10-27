@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ehIdioma, IDIOMA_PADRAO, IDIOMAS } from "@/i18n/config";
-import { lerIdiomaPreferido } from "@/lib/persistencia";
+import { lerIdiomaPreferido } from "@/lib/idioma-preferido";
 
 export function RedirecionarIdioma() {
   useEffect(() => {

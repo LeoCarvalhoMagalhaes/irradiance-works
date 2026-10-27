@@ -1,11 +1,13 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+import { toast } from "sonner";
 import type { Comissionamento } from "@/core/integracao/comissionamento";
 import { aplicarConclusoes, type Conclusao, eventoDaOs, type OrdemServico } from "@/core/manutencao/ordens";
 import type { EventoUsuario } from "@/core/monitoramento/gerador";
 import type { Premissas } from "@/core/simulador/premissas";
 import type { EntradaProposta, Proposta } from "@/core/simulador/proposta";
+import { useTextos } from "@/i18n/cliente";
 import { hojeLocal } from "./hoje";
 import { CHAVE_ARMAZENAMENTO, type Estado, estadoDemonstracao, gravarEstado, lerEstado, type PropostaSalva, type ResultadoLeitura } from "./persistencia";
 
@@ -37,8 +39,19 @@ function assinar(ouvinte: () => void) {
 }
 
 /** Estado persistido; null durante a pré-renderização estática (antes da hidratação). */
+let avisado = false;
+
+/** Estado persistido; avisa uma única vez por sessão se o armazenamento está corrompido ou indisponível. */
 export function useEstado(): ResultadoLeitura | null {
-  return useSyncExternalStore(assinar, carregar, () => null);
+  const estado = useSyncExternalStore(assinar, carregar, () => null);
+  const t = useTextos("comum");
+  useEffect(() => {
+    if (!estado || avisado) return;
+    avisado = true;
+    if (estado.situacao === "corrompido") toast.warning(t.armazenamento.corrompido, { duration: 10000 });
+    if (estado.situacao === "indisponivel") toast.warning(t.armazenamento.indisponivel, { duration: 10000 });
+  }, [estado, t]);
+  return estado;
 }
 
 export function gravacaoFalhou(): boolean {

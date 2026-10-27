@@ -7,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Idioma } from "@/i18n/config";
 import { ProvedorIdioma } from "@/i18n/cliente";
 import type { Dicionario } from "@/i18n/tipos";
-import { AvisoArmazenamento } from "./aviso-armazenamento";
 
 export function Provedores({ idioma, textos, children }: { idioma: Idioma; textos: Partial<Dicionario>; children: React.ReactNode }) {
   return (
@@ -17,7 +16,6 @@ export function Provedores({ idioma, textos, children }: { idioma: Idioma; texto
         <ProvedorIdioma idioma={idioma} textos={textos}>
           <TooltipProvider delayDuration={200}>
             {children}
-            <AvisoArmazenamento />
             <Toaster position="bottom-right" richColors closeButton containerAriaLabel={textos.comum?.notificacoes} />
           </TooltipProvider>
         </ProvedorIdioma>
