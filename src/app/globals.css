@@ -34,6 +34,7 @@
   --color-solar: var(--solar);
   --color-solar-foreground: var(--solar-foreground);
   --color-solar-suave: var(--solar-suave);
+  --color-solar-destaque: var(--solar-destaque);
   --color-ok: var(--ok);
   --color-ok-suave: var(--ok-suave);
   --color-atencao: var(--atencao);
@@ -90,6 +91,8 @@
   --solar: oklch(0.72 0.165 58);
   --solar-foreground: oklch(0.24 0.05 50);
   --solar-suave: oklch(0.96 0.035 75);
+  /* Ícones e destaques sobre solar-suave (contraste ≥ 4,5:1 nos dois temas). */
+  --solar-destaque: oklch(0.5 0.13 55);
   --ok: oklch(0.47 0.12 150);
   --ok-suave: oklch(0.95 0.04 150);
   --atencao: oklch(0.5 0.12 65);
@@ -133,6 +136,7 @@
   --solar: oklch(0.78 0.15 65);
   --solar-foreground: oklch(0.22 0.05 50);
   --solar-suave: oklch(0.3 0.05 60);
+  --solar-destaque: oklch(0.84 0.14 70);
   --ok: oklch(0.76 0.14 150);
   --ok-suave: oklch(0.28 0.05 150);
   --atencao: oklch(0.82 0.14 80);

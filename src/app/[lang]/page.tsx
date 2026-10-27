@@ -65,7 +65,7 @@ export default async function PaginaInicio({ params }: { params: Promise<{ lang:
             <Link key={chave} href={href} className="group rounded-xl focus-visible:outline-2">
               <Card className="h-full transition-shadow duration-200 group-hover:shadow-elevada">
                 <CardHeader>
-                  <span className="mb-2 inline-flex size-10 items-center justify-center rounded-lg bg-solar-suave text-solar-foreground">
+                  <span className="mb-2 inline-flex size-10 items-center justify-center rounded-lg bg-solar-suave text-solar-destaque">
                     <Icone aria-hidden="true" className="size-5" />
                   </span>
                   <CardTitle className="flex items-center gap-1">
@@ -104,7 +104,7 @@ export default async function PaginaInicio({ params }: { params: Promise<{ lang:
           {numeros.map((n) => (
             // Um único <div> por par (o HTML só admite esse invólucro em <dl>); dt antes de dd no DOM,
             // número acima do rótulo na tela.
-            <div key={n.rotulo} className="flex flex-col-reverse rounded-xl border bg-card px-5 py-5 text-card-foreground shadow-sm">
+            <div key={n.rotulo} className="flex flex-col-reverse justify-end rounded-xl border bg-card px-5 py-5 text-card-foreground shadow-sm">
               <dt className="mt-1 text-sm text-muted-foreground">{n.rotulo}</dt>
               <dd className="text-3xl font-semibold tabular-nums">{n.valor}</dd>
             </div>

@@ -113,7 +113,7 @@ export function AbaVisao({ usina, resultado, ctx, fator }: { usina: UsinaMonitor
             <YAxis {...EIXO} width={60} tickFormatter={(v) => f.numero(v)} />
             <ChartTooltip content={<DicaGrafico formatar={(v) => f.energia(v)} />} />
             <Legend content={<ChartLegendContent />} />
-            <Bar dataKey="esperada" fill="var(--color-esperada)" radius={RAIO_BARRA} fillOpacity={0.45} />
+            <Bar dataKey="esperada" fill="var(--color-esperada)" radius={RAIO_BARRA} />
             <Bar dataKey="medida" fill="var(--color-medida)" radius={RAIO_BARRA} />
           </BarChart>
         </ChartContainer>

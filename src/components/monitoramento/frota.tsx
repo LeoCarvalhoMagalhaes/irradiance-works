@@ -219,7 +219,7 @@ export function Frota() {
         </CardContent>
       </Card>
 
-      <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-start">
         <Card>
           <CardHeader>
             <CardTitle className="text-base">{t.mapa.titulo}</CardTitle>
