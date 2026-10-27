@@ -186,4 +186,4 @@ tests/unit/      Vitest       tests/e2e/   Playwright      tests/fixtures/   ref
 
 ## Licenças
 
-Dependências, dados e fontes tipográficas de terceiros estão em [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) e na página de metodologia; dados da ANEEL sob ODbL 1.0.
+Código sob a [licença MIT](LICENSE). Dependências, dados e fontes tipográficas de terceiros estão em [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) e na página de metodologia; dados da ANEEL sob ODbL 1.0.
